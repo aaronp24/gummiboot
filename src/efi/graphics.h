@@ -20,6 +20,7 @@
 #ifndef __GUMMIBOOT_GRAPHICS_H
 #define __GUMMIBOOT_GRAPHICS_H
 
+EFI_STATUS set_gop_mode(void);
 EFI_STATUS graphics_mode(BOOLEAN on);
 EFI_STATUS graphics_splash(EFI_FILE *root_dir, CHAR16 *path,
                            const EFI_GRAPHICS_OUTPUT_BLT_PIXEL *background);

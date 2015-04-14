@@ -23,6 +23,18 @@
 #include "util.h"
 #include "graphics.h"
 
+EFI_STATUS set_gop_mode() {
+        EFI_GUID GOPGuid = EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID;
+        EFI_GRAPHICS_OUTPUT_PROTOCOL *GOPControl;
+        EFI_STATUS err;
+
+        err = LibLocateProtocol(&GOPGuid, (VOID **)&GOPControl);
+        if (EFI_ERROR(err))
+                return err;
+
+        return uefi_call_wrapper(GOPControl->SetMode, 2, GOPControl, 0);
+}
+
 EFI_STATUS graphics_mode(BOOLEAN on) {
         #define EFI_CONSOLE_CONTROL_PROTOCOL_GUID \
                 { 0xf42f7782, 0x12e, 0x4c12, { 0x99, 0x56, 0x49, 0xf9, 0x43, 0x4, 0xf7, 0x21 } };
